@@ -57,3 +57,11 @@ typings/
 # dotenv environment variables file
 .env
 
+# angular 2 files to ignore
+system-config.js*
+app/**/*.js
+app/**/*.map
+bower_components
+aot/*
+dist/*
+yarn.lock
