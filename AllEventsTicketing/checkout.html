@@ -1,0 +1,110 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Untitled Document</title>
+
+<link href="css/style.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+
+			
+<div id="scPanel">
+	<div id="formTitle">     	
+    	<h2>Checkout and Purchase Tickets</h2>
+    </div>
+    
+    <div id='scTitleDiv'>
+        <div class="scRow">
+        	<div id="scii1" class="scItemDescTitle">Description</div>
+            <div id="sciqt" class="scItemQuantityTitle">Quantity</div>
+            <div id="scipt" class="scItemPriceTitle">Price</div>
+        </div>
+    </div>
+    
+    <div id='scDiv'>
+    	<div class="scRow">
+        	<div id="scid1" class="scItemDesc">Tron - Cinema 4, Oct. 17, 4:00 PM</div>
+            <div id="sciq1" class="scItemQuantity">2</div>
+            <div id="scip1" class="scItemUnitPrice">5.99</div>
+        </div>
+        <div class="scRow">
+        	<div id="scid2" class="scItemDesc">Playmill Season Pass</div>
+            <div id="sciq2" class="scItemQuantity">4</div>
+            <div id="scip2" class="scItemUnitPrice">1.99</div>
+        </div>
+        <div class="scRow">
+        	<div id="scid3" class="scItemDesc">Phantom of the Opera - Oct. 31</div>
+            <div id="sciq3" class="scItemQuantity">2</div>
+            <div id="scip3" class="scItemUnitPrice">49.99</div>
+        </div>
+        <div class="scRow">
+        	<div id="scid4" class="scItemDesc">BYU vs. Utah - Sept. 17</div>
+            <div id="sciq4" class="scItemQuantity">5</div>
+            <div id="scip4" class="scItemUnitPrice">25.00</div>
+        </div>
+        <div class="scRow">
+        	<div id="scid5" class="scItemDesc">Contagion - BigScreen Theaters, Nov. 2, 7:00 PM</div>
+            <div id="sciq5" class="scItemQuantity">2</div>
+            <div id="scip5" class="scItemUnitPrice">8.00</div>
+            
+        </div>
+        <div class="scRow">
+        	<div id="shCost" class="scSummDesc">Shipping Cost&nbsp; </div>
+            <div id="scAmount" class="scSummAmount">???.??</div>
+        </div>
+        <div class="scRow">
+        	<div id="taxDesc" class="scSummDesc">Tax&nbsp; </div>
+            <div id="taxAmount" class="scSummAmount">???.??</div>
+        </div>
+        <div class="scRow">
+        	<div id="totalDesc" class="scSummDesc">Total&nbsp; </div>
+            <div id="totalPrice" class="scSummAmount">$???.??</div>
+        </div>
+    </div>
+
+    <br />
+    
+    <div id="smpm">
+
+        <div id="pmDiv">
+            <span class="label">Payment Method:</span><br />
+            <select id="paymentMethod" class="dropDown">
+                <option value="American Express">American Express</option>
+                <option value="Discovery">Discovery</option>
+                <option value="MasterCard">MasterCard</option>
+                <option value="Visa">Visa</option>
+            </select>     
+            <br /><br />
+            <span class="label">Credit Card No.:</span><br />
+            <input id="ccNo" class="inputField" size="16" /><br /> <br />
+            <span class="label">Expiration Date:</span><br />
+            <div id="expDate">
+                <span >Month</span>
+                <span style="position:relative; left: 10px;">Year</span> <br /> 
+                <input id="ccEDMonth" class="inputField" size="2" />
+                <input id="ccEDYear" class="inputField" size="2" style="position:relative; left: 6px;" />
+            </div>           
+        </div>
+        
+        <div id="stDiv">
+            <span class="label" style="position: relative; left: 5px;">Shipping Method:</span><br />
+            <input name="smRb" class="smRadioButton" type="radio" value="UPS" onclick="shippingCart.changePaymentMethod()"/><span class="radioLabel">UPS</span><br />
+            <input name="smRb" class="smRadioButton" type="radio" value="USMail" onclick="shippingCart.changePaymentMethod()"/><span class="radioLabel">US Mail</span><br />
+            <input name="smRb" class="smRadioButton" type="radio" value="FedExStd" onclick="shippingCart.changePaymentMethod()"/><span class="radioLabel">FedEx Standard</span><br />
+            <input name="smRb" class="smRadioButton" type="radio" value="FedExOv" onclick="shippingCart.changePaymentMethod()"/><span class="radioLabel">FedEx Overnight</span><br />
+        </div>
+    </div>
+
+    <br /><br /><br />
+
+	<div id="buttonsDiv">   
+        <input id="purchaseButton" value="Purchase Tickets" onclick="shippingCart.checkout()" type="button">
+    	<input id="cancelButton" value="Cancel" type="button">
+	</div>
+</div>
+
+
+</body>
+</html>

@@ -1,0 +1,119 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv='Content-Type' content='text/html; charset=iso-8859-1' />
+<title></title>
+<link rel='stylesheet' href='css/style.css' type='text/css'>
+</head>
+<script type="text/javascript" src="FrontController.js"></script>
+<script type="text/javascript" src="startPage.js"></script>
+<script type="text/javascript" src="VcObjects.js"></script>
+<script type="text/javascript" src="ViewController.js"></script>
+<script type="text/javascript" src="ApplicationController.js"></script>
+<script type="text/javascript" src="Loan.js"></script>
+<script type="text/javascript" src="ShoppingCart.js"></script>
+<script type="text/javascript" src="TestShoppingCart.js"></script>
+<script type="text/javascript" src="Set.js"></script>
+
+<script>
+		
+	function showMenu(menu) {
+		frontController.viewController.clearMiddle();
+		frontController.viewController.clearMenus();
+		document.getElementById(menu).style.display = 'block';
+	}
+
+	
+</script>
+
+<body onload="startPage()">
+
+<!-- open main container div -->
+<div id="mainContainer">
+	<div id="innerContainer">
+
+		<div id="topSection">	
+   
+        	<!-- header section -->
+        	<div id="header">
+                <img id="logo" src="images/untitled.jpg" class="logo" />
+                <div id="welcome">Welcome to AllEvents Ticketing</div>
+                <div id="login">
+                    <span>Username: </span><input name="" id="username" type="text" size="10"/><br />
+                    <span>Password: </span><input name="" id="password" type="text" size="10"/><br />
+                    <input id='loginButton' type='button' value='Login'>
+                </div>
+            </div> <!-- end of header section -->
+           
+            <!-- navigation menu section -->   
+            <div id="navigation">
+                <span class="topNavItem">Home</span>
+                <span class="topNavItem">Search</span>
+                <span class="topNavItem" onclick="frontController.dispatch('displayCheckout', 'inputArea')">Checkout</span>               
+                <span  class="topNavItem" onclick="showMenu('loanMenu')">Season Tickets</span>
+                <span  class="topNavItem" onclick="showMenu('marketingMenu')">Marketing</span>
+                <span class="topNavItem">Contacts Us</span>
+                <span class="topNavItem">Help</span>	
+                <span class="topNavItem" onclick="showMenu('testMenu')">Test</span>	
+            </div> <!-- end of navigation menu section -->    
+
+        </div> <!-- end of top -->
+        
+        
+
+		<div id='middle'>
+        
+       		 <div id="testMenu" class="menu">
+				<div><span onclick='frontController.dispatch("testGetSubTotal", "testArea")'><a>getSubTotal</a></span></div>
+				<div><span onclick='frontController.dispatch("testGetTotalTax", "testArea")'><a>getTotalTax</a></span></div>
+				<div><span onclick='frontController.dispatch("testGetShippingCost", "testArea")'><a>getShippingCost</a></span></div>
+			</div>
+			
+		
+			<div id="loanMenu" class="menu">
+				<div><span onclick='frontController.dispatch("displaySalesCommission", "inputArea")'><a>Sales commission</a></span></div>
+				<div><span onclick='frontController.dispatch("displaySeasonPassCommission", "inputArea")'><a>Season pass commission</a></span></div>
+				<div><span onclick='frontController.dispatch("displayMonthlyPayment", "inputArea")'><a>Monthly payment</a></span></div>
+				<div><span onclick='frontController.dispatch("displayPayOffAmount", "inputArea")'><a>Pay off amount</a></span></div>
+				<div><span onclick='frontController.dispatch("displayTotalInterestPaid", "inputArea")'><a>Total Interest Paid</a></span></div>
+				<div><span onclick='frontController.dispatch("displayTotalLoanCost", "inputArea")'><a>Totalcost</a></span></div>
+				<div><span onclick='frontController.dispatch("displayFutureValue", "inputArea")'><a>Future value</a></span></div>
+				<div><span onclick='frontController.dispatch("displayPresentValue", "inputArea")'><a>Present value</a></span></div>
+			</div>
+			
+			<div id="marketingMenu" class="menu">
+				<div><span onclick='frontController.dispatch("displayIntersection", "marketingArea")'><a>Intersection</a></span></div>
+				<div><span onclick='frontController.dispatch("displayUnion", "marketingArea")'><a>Union</a></span></div>
+				<div><span onclick='frontController.dispatch("displayRelativeComplement", "marketingArea")'><a>Relative complement</a></span></div>
+				<div><span onclick='frontController.dispatch("displaySymmetricDifference", "marketingArea")'><a>Symmetric difference</a></span></div>
+			</div>
+            
+			<img id='familyImg' src='images/family1.jpg'>
+			
+			<div id="inputArea" style="display: none;"></div>
+			<div id="outputArea" style="display: none;"></div>
+            
+            <div id="testArea" style="display: none;"></div>
+			
+			<div id="marketingArea"></div>
+				
+	
+
+		</div>
+
+		<div id="bottom"> <!-- begin bottom section -->
+			<div id='adImg' style="margin-top: 10px; margin-left: 40px;"> <img  src="images/ads.jpg" border="0" /> </div>
+			<div id="copyright">Copyright 2007,Home Town Bank</div>
+			<div id="privacy">
+				<a href="index.html">Privacy Policy</a> - 
+				<a href="index.html">Terms of Use</a> - 
+				<a href="index.html">Contact Us</a> - 
+				<a href="index.html">Locations</a></div>
+			</div> 
+		</div> <!-- end bottom section -->
+	
+	</div> <!-- end innner container -->
+
+</div> <!-- close main container div --> 
+<div id="messageArea"> </div>
+</body></html>
