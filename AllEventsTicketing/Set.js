@@ -41,15 +41,14 @@ function Set() {
             return null;
 		}
 
-        for (var i = 0; i < listA.length; i++) {  //for every element in listA
-            var nextValue = listA[i];  //get next value in the list
+        for (var i = 0; i < listA.length; i++) {
+            var nextValue = listA[i];
             var found = false;
 
-           //for every element in listB
             for (var j = 0; j < listB.length; j++) {
-                if (listB[j] === nextValue) {      //this listB element equals nextValue//
-                    found = true;  //add listB element to end of resultList//
-                    break;  //break out of (exit) the listB inner loop//
+                if (listB[j] === nextValue) {
+                    found = true;
+                    break;  
                 }
             }
             if (!found) {
