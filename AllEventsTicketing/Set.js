@@ -48,7 +48,7 @@ function Set() {
             for (var j = 0; j < listB.length; j++) {
                 if (listB[j] === nextValue) {
                     found = true;
-                    break;  
+                    break;
                 }
             }
             if (!found) {
