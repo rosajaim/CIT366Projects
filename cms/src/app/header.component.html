@@ -6,9 +6,9 @@
 
     <div class="collapse navbar-collapse">
       <ul class="nav navbar-nav">
-        <li><a href="#">Documents</a></li>
-        <li><a href="#">Messages</a></li>
-        <li><a href="#">Contacts</a></li>
+        <li><a href="#" (click)="onSelected('document')">Documents</a></li>
+        <li><a href="#" (click)="onSelected('message')">Messages</a></li>
+        <li><a href="#" (click)="onSelected('contact')">Contacts</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li class="dropdown">
@@ -24,3 +24,5 @@
 </nav>
 
 
+<!--<app-contact-item *ngFor="let contact of contacts" [contact]="contact" (click)="onSelected(contact)" >-->
+<!--</app-contact-item>-->

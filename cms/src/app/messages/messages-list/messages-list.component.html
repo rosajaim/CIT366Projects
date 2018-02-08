@@ -1,0 +1,27 @@
+<div class="row">
+  <div class="col-md-5">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <div class="row pad-left-right">
+          <span class="title pull-left">Message</span>
+        </div>
+      </div>
+      <div class="panel-body">
+        <div class="row">
+          <div class="col-xs-12">
+            <app-messages-item
+              *ngFor="let messageEl of messages"
+              [message] = "messageEl"
+              (click)="onAddMessage(messageEl)">
+            </app-messages-item>
+          </div>
+        </div>
+      </div>
+      <div class="panel-footer">
+        <app-messages-edit
+          (addMessageEvent)="onAddMessage($event)">
+        </app-messages-edit>
+      </div>
+    </div>
+  </div>
+</div>

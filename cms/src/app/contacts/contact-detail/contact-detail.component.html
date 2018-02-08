@@ -1,25 +1,27 @@
-  <div class="panel panel-default">
-    <div class="panel-heading clearfix">
-      <div style="height: 95px;
-                  padding:0"
-                  class="panel-heading">
-        <div class="container">
-        <div class="botton-group">
-            <button class="btn btn-success buttonE ">Edit</button>
-            <button class="btn btn-success button ">Delete</button>
-        </div>
-        </div>
+<div class="panel panel-default">
+  <div class="panel-heading clearfix">
+    <p class="contact-name">{{contact?.name}}</p>
+    <div class="row">
+      <div class="pull-left">
+        <img
+          src="{{contact?.imageUrl}}"
+          alt="{{contact?.name}}"
+          class="img-responsive"
+          style="max-height:100px;
+          padding-left:12px">
       </div>
-    </div>
-
-    <div class="body-panel">
-      <div style="height: 80px;
-           padding:15px" class="panel-body">
-        <p>Email:</p>
-        <p>Phone:</p>
+      <div class="pull-right" style="margin-right: 10px; margin-top: 80px">
+        <button class="btn btn-primary button-edit">Edit</button>
+        <button class="btn btn-danger button-delete">Delete</button>
       </div>
     </div>
   </div>
+
+  <div class="panel-body">
+    <p><b>Email:</b> {{contact?.email}}</p>
+    <p><b>Phone:</b> {{contact?.phone}}</p>
+  </div>
+</div>
 
 
 
