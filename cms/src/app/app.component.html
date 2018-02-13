@@ -1,4 +1,5 @@
 <app-header (selectedFeatureEvent)= "switchView($event)"></app-header>
+
 <div class="container">
   <app-documents *ngIf="selectedFeature === 'document'"></app-documents>
   <app-messages *ngIf="selectedFeature === 'message'"></app-messages>

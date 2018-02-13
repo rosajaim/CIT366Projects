@@ -1,8 +1,8 @@
 <div class="row">
-  <div class="col-md-3">
-    <app-document-list>it works!</app-document-list>
+  <div class="col-md-5">
+    <app-document-list (selectedDocumentEvent)="Document=$event"></app-document-list>
   </div>
-  <div class="col-lg-9">
-    <app-document-detail>it works!</app-document-detail>
+  <div class="col-lg-4">
+    <app-document-detail [document]="Document" *ngIf="selectedDocument === document"></app-document-detail>
   </div>
 </div>

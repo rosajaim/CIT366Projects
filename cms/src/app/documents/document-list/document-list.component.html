@@ -1,13 +1,22 @@
 <div class="panel panel-default">
-  <div class="panel-heading">
+  <div class="panel-heading clearfix">
     <div class="row pad-left-right">
       <span class="pull-left title">Documents</span>
-      <a class="btn btn-success pull-right">Add Documents</a>
+      <a class="btn btn-success pull-right button-new-document">Add Document</a>
     </div>
   </div>
+  <div class="row">
+    <div class="col-xs-12">
   <div class="panel-body">
     <div class="center-panel">
-      <app-document-item>it works!</app-document-item>
+      <app-document-item
+        *ngFor="let documentEl of documents"
+        [document]="documentEl"
+        (click)="onSelectedDocument(documentEl)">
+      </app-document-item>
     </div>
   </div>
+    </div>
+
+ </div>
 </div>

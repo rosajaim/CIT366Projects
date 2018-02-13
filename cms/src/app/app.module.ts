@@ -16,6 +16,7 @@ import { MessagesComponent } from './messages/messages.component';
 import { MessagesItemComponent } from './messages/messages-item/messages-item.component';
 import { MessagesEditComponent } from './messages/messages-edit/messages-edit.component';
 import { MessagesListComponent } from './messages/messages-list/messages-list.component';
+import {DropdownDirective} from './Shared/dropdown.directive';
 
 
 @NgModule({
@@ -34,6 +35,7 @@ import { MessagesListComponent } from './messages/messages-list/messages-list.co
     MessagesItemComponent,
     MessagesEditComponent,
     MessagesListComponent,
+    DropdownDirective
   ],
   imports: [
     BrowserModule,
