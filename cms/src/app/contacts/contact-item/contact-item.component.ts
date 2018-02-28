@@ -1,5 +1,6 @@
-import { Component, OnInit, Input } from '@angular/core';
+import {Component, OnInit, Input} from '@angular/core';
 import {Contact} from '../contact.model';
+
 
 @Component({
   selector: 'app-contact-item',
@@ -8,8 +9,9 @@ import {Contact} from '../contact.model';
 })
 export class ContactItemComponent implements OnInit {
   @Input() contact: Contact;
- // favoriteColor= "Red";
-  constructor() { }
+
+  constructor() {
+  }
 
   ngOnInit() {
   }

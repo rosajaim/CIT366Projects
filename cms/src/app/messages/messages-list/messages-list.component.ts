@@ -1,5 +1,6 @@
-import {Component, EventEmitter, Input, OnInit, Output,} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Message} from '../message.model';
+import {MessagesService} from '../messages.service';
 
 @Component({
   selector: 'app-messages-list',
@@ -7,25 +8,24 @@ import {Message} from '../message.model';
   styleUrls: ['./messages-list.component.css']
 })
 export class MessagesListComponent implements OnInit {
-  @Input() message: Message;
 
-  messages: Message[] = [
-    new Message (1, 'This is test', 'It works!', 'Bro. Jackson'),
-    new Message (2, 'Hello World', 'Hello world!', 'Bro. Barzee'),
-    new Message (3, 'I like tacos', 'I want tacos', 'Bro. Morrin'),
-    new Message (4, 'I am tired', 'Go to sleep', 'Bro. Allred'),
-  ];
+  messages: Message[] = [];
 
-  constructor() { }
+  constructor(private messagesService: MessagesService) {
+    this.messages = this.messagesService.getMessages();
 
-  // @Output() messageAdded = new EventEmitter<Message>();
-
-
-   onAddMessage(message: Message) {
-    this.messages.push(message);
   }
 
   ngOnInit() {
+
+    this.messagesService.messageChangeEvent.subscribe(
+    (messages: Message[]) => {
+      this.messages = messages;
+    });
+  }
+
+   onAddMessage(message: Message) {
+    this.messages.push(message);
   }
 
 }

@@ -1,5 +1,7 @@
 import {Component, OnInit, ElementRef, ViewChild, Output, EventEmitter} from '@angular/core';
 import {Message} from '../message.model';
+import {Contact} from '../../contacts/contact.model';
+import {MessagesService} from '../messages.service';
 
 @Component({
   selector: 'app-messages-edit',
@@ -15,13 +17,16 @@ export class MessagesEditComponent implements OnInit {
 
  currentSender = 'Jaime';
 
-  constructor() { }
+  constructor(private messagesService: MessagesService) { }
 
   onSendMessage() {
     const subjectContent = this.subjectInputRef.nativeElement.value;
     const msgContent = this.msgTextRef.nativeElement.value;
-    const newMessage = new Message(5, subjectContent, msgContent, this.currentSender);
+    const newMessage = new Message("", subjectContent, msgContent, this.currentSender);
     this.addMessageEvent.emit(newMessage);
+
+    this.messagesService.addMessage(newMessage);
+    // this.addMessageEvent.emit(newMessage);
 
   }
 
