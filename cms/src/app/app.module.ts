@@ -20,6 +20,7 @@ import {DropdownDirective} from './Shared/dropdown.directive';
 import {ContactService} from './contacts/contact.service';
 import {MessagesService} from './messages/messages.service';
 import {DocumentService} from './documents/document.service';
+import { AppRoutingComponent } from './app-routing/app-routing.component';
 
 
 @NgModule({
@@ -38,7 +39,8 @@ import {DocumentService} from './documents/document.service';
     MessagesItemComponent,
     MessagesEditComponent,
     MessagesListComponent,
-    DropdownDirective
+    DropdownDirective,
+    AppRoutingComponent
   ],
   imports: [
     BrowserModule,
