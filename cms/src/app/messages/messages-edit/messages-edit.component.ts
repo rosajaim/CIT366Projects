@@ -15,18 +15,18 @@ export class MessagesEditComponent implements OnInit {
 
   @Output() addMessageEvent = new EventEmitter<Message>();
 
- currentSender = 'Jaime';
+
 
   constructor(private messagesService: MessagesService) { }
 
   onSendMessage() {
     const subjectContent = this.subjectInputRef.nativeElement.value;
     const msgContent = this.msgTextRef.nativeElement.value;
-    const newMessage = new Message("", subjectContent, msgContent, this.currentSender);
+    const currentSender = "1";
+    const newMessage = new Message("", subjectContent, msgContent, currentSender);
     this.addMessageEvent.emit(newMessage);
 
     this.messagesService.addMessage(newMessage);
-    // this.addMessageEvent.emit(newMessage);
 
   }
 
