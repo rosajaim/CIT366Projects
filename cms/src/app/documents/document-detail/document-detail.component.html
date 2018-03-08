@@ -3,9 +3,9 @@
    <div class="row pad-all">
       <h4 class="title margin-left-right">{{document?.name}}</h4>
       <div class="row pull-right margin-left-right" style="margin-right: 10px; margin-top: 32px">
-        <a class="btn btn-primary">View</a>
-        <a class="btn btn-info" >Edit</a>
-        <a class="btn btn-danger">Delete</a>
+        <a class="btn btn-primary" (click)="onView()">View</a>
+        <a class="btn btn-info" routerLink="edit">Edit</a>
+        <a class="btn btn-danger" (click)="onDelete()">Delete</a>
       </div>
     </div>
   </div>
@@ -18,7 +18,7 @@
       <br>
       <div class="row">
         <label>URL:</label>
-        <div class="label-value wordBreak">{{document?.Url}}</div>
+        <div class="label-value wordBreak">{{document?.url}}</div>
       </div>
     </div>
   </div>

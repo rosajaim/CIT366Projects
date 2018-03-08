@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 
+import { FormsModule } from '@angular/forms';
 import { AppComponent} from './app.component';
 import { HeaderComponent } from "./header.component";
 import { ContactsComponent } from './contacts/contacts.component';
@@ -16,12 +16,15 @@ import { MessagesComponent } from './messages/messages.component';
 import { MessagesItemComponent } from './messages/messages-item/messages-item.component';
 import { MessagesEditComponent } from './messages/messages-edit/messages-edit.component';
 import { MessagesListComponent } from './messages/messages-list/messages-list.component';
-import {DropdownDirective} from './Shared/dropdown.directive';
-import {ContactService} from './contacts/contact.service';
-import {MessagesService} from './messages/messages.service';
-import {DocumentService} from './documents/document.service';
-import { AppRoutingComponent } from './app-routing/app-routing.component';
-
+import { DropdownDirective} from './Shared/dropdown.directive';
+import { ContactService} from './contacts/contact.service';
+import { MessagesService} from './messages/messages.service';
+import { DocumentService} from './documents/document.service';
+import {AppRoutingModule} from './app-routing.module';
+import { DocumentViewComponent } from './documents/document-view/document-view.component';
+import { DocumentEditComponent } from './documents/document-edit/document-edit.component';
+import { WindRefService } from './wind-ref.service';
+import { ContactEditComponent } from './contacts/contact-edit/contact-edit.component';
 
 @NgModule({
   declarations: [
@@ -40,13 +43,22 @@ import { AppRoutingComponent } from './app-routing/app-routing.component';
     MessagesEditComponent,
     MessagesListComponent,
     DropdownDirective,
-    AppRoutingComponent
+    DocumentViewComponent,
+    DocumentEditComponent,
+    ContactEditComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
+    AppRoutingModule
+
   ],
-  providers: [ContactService, MessagesService, DocumentService],
+  providers: [
+    ContactService,
+    MessagesService,
+    DocumentService,
+    WindRefService
+  ],
   bootstrap: [AppComponent]
 
 })

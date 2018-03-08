@@ -5,11 +5,8 @@ import { Component } from '@angular/core';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
-  selectedFeature = 'documents';
-  // title = 'app';
-  switchView(selectedFeature: string) {
-    this.selectedFeature = selectedFeature;
 
-  }
+export class AppComponent {
+  title ='Welcome CMS!';
+
 }

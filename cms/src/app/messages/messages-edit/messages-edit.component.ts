@@ -15,8 +15,6 @@ export class MessagesEditComponent implements OnInit {
 
   @Output() addMessageEvent = new EventEmitter<Message>();
 
-
-
   constructor(private messagesService: MessagesService) { }
 
   onSendMessage() {
