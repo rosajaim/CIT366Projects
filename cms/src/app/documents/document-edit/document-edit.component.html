@@ -1,0 +1,63 @@
+<div class="panel panel-default">
+  <div class="panel-body">
+
+    <form id="document-edit" (ngSubmit)="onSubmit(f)" #f="ngForm">
+      <div class="row">
+
+        <div class="col-sm-12 form-group">
+          <label for="name">Document title</label>
+          <input
+            type="text"
+            id="name"
+            class="form-control"
+            size="120"
+            max="120"
+            name="documentTitle"
+            [ngModel]="originalDocument?.name"
+            required
+            #name="ngModel">
+        </div>
+
+        <div class="col-sm-12 form-group">
+          <label for="description">Document description</label>
+          <input
+            type="text"
+            id="description"
+            class="form-control"
+            size="120"
+            max="255"
+            name="document documentDescription"
+            [ngModel]="originalDocumet?.description">
+
+        </div>
+
+        <div class="col-sm-12 form-group">
+          <label for="documentUrl">Document URL</label>
+          <input
+            type="text"
+            id="documentUrl"
+            class="form-control"
+            size="150"
+            max="255"
+            name="documentUrl"
+            [ngModel]="originalDocument?.url"
+            required
+            #url="ngModel">
+          <span class="alert alert-danger help-block" *ngIf="!url.valid || !name.valid">The Document title and Document URL are required</span>
+
+        </div>
+      </div>
+
+
+      <div class="row">
+        <div class="col-xs-12">
+          <button class="btn btn-success" [disabled]="!f.valid"  type="submit">Save</button>
+          <button class="btn btn-primary" type="button" (click)="onCancel()">Cancel</button>
+        </div>
+      </div>
+
+    </form>
+
+  </div>
+</div>
+
