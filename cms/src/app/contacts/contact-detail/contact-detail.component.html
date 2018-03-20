@@ -11,7 +11,7 @@
           padding-left:12px">
       </div>
       <div class="pull-right" style="margin-right: 10px; margin-top: 80px">
-        <button class="btn btn-primary" routerLink="../id/edit">Edit</button>
+        <button class="btn btn-primary" [routerLink]="['edit']">Edit</button>
         <button class="btn btn-danger" (click)="onDelete()">Delete</button>
       </div>
     </div>
@@ -19,19 +19,19 @@
 
   <div class="panel-body">
     <div class="pad-left-right">
-    <div class="row">
-      <label>Email:</label>
-      <span class="label-value">{{contact?.email}}</span>
-    </div>
-      <br>
-     <div class="row">
-       <label>Phone:</label>
-       <span class="label-value">{{contact?.phone}}</span>
-     </div>
-    </div>
+      <div class="row">
+        <label>Email:</label>
+        <span class="label-value">{{ contact?.email }}</span>
+      </div>
+      <div class="row">
+        <label>Phone:</label>
+        <span class="label-value">{{ contact?.phone }}</span>
+      </div>
+      <div class="row">
+      <span *ngIf="contact?.group != null"><label>Contacts in Team:</label></span>
+      </div>
+      <app-contact-item *ngFor="let contact of contact.group" [contact]="contact"></app-contact-item>
+
+  </div>
   </div>
 </div>
-
-
-
-

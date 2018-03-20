@@ -14,3 +14,13 @@
   padding-left:1rem;
   padding-right:1rem;
 }
+.button-new-document:hover {
+  box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
+}
+.panel, panen-default {
+  box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19)
+}
+
+/*.panel-default, panel-heading {*/
+  /*background-color: slategray; border-color: slategray;*/
+/*}*/
