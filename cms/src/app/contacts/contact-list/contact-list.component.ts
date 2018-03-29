@@ -12,6 +12,7 @@ export class ContactListComponent implements OnInit, OnDestroy{
 
   contacts: Contact[] = [];
   private subscription: Subscription
+  term: string;
 
   constructor(private contactService: ContactService) {
 
@@ -30,6 +31,10 @@ export class ContactListComponent implements OnInit, OnDestroy{
 
   ngOnDestroy() {
     this.subscription.unsubscribe()
+  }
+
+  onKeyPress(value: string) {
+    this.term = value;
   }
 
 

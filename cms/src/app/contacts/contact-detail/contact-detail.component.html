@@ -28,10 +28,9 @@
         <span class="label-value">{{ contact?.phone }}</span>
       </div>
       <div class="row">
-      <span *ngIf="contact?.group != null"><label>Contacts in Team:</label></span>
+        <span *ngIf="contact?.group != null"><label>Contacts in Team:</label></span>
       </div>
       <app-contact-item *ngFor="let contact of contact.group" [contact]="contact"></app-contact-item>
-
-  </div>
+    </div>
   </div>
 </div>

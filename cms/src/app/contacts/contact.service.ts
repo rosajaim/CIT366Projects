@@ -1,7 +1,9 @@
 import { Injectable, EventEmitter } from '@angular/core';
 import { Contact} from './contact.model';
 import { MOCKCONTACTS } from './MOCKCONTACTS';
-import {Subject} from 'rxjs/Subject';
+import { Subject } from 'rxjs/Subject';
+import { Http, Response, Headers } from '@angular/http';
+import 'rxjs/Rx'
 
 @Injectable()
 export class ContactService {
@@ -10,13 +12,12 @@ export class ContactService {
 
   contactListChangedEvent = new Subject<Contact[]>();
   contactSelectedEvent = new EventEmitter<Contact>();
-  contactChangedEvent = new EventEmitter<Contact[]>();
+  // contactChangedEvent = new EventEmitter<Contact[]>();
 
   maxContactId: number;
 
-  constructor() {
-    this.contacts = MOCKCONTACTS;
-    this.maxContactId = this.getMaxId()
+  constructor(private http: Http) {
+   this.initContacts();
 
   }
 
@@ -35,6 +36,7 @@ export class ContactService {
   }
 
   getMaxId(): number {
+
     let maxId = 0;
 
     for(let contact in this.contacts) {
@@ -54,8 +56,8 @@ export class ContactService {
     this.maxContactId++;
     newContact.id = this.maxContactId.toString();
     this.contacts.push(newContact);
-    let contactListClone: Contact[] = this.contacts.slice();
-    this.contactListChangedEvent.next(contactListClone);
+    this.storeContacts()
+
 
   }
 
@@ -71,9 +73,7 @@ export class ContactService {
 
     newContact.id = originalContact.id;
     this.contacts[pos] = newContact;
-    let contactsListClone: Contact[] = this.contacts.slice();
-    this.contactListChangedEvent.next(contactsListClone)
-
+    this.storeContacts()
   }
 
   deleteContact(contact: Contact) {
@@ -87,9 +87,48 @@ export class ContactService {
     }
 
     this.contacts.splice(pos, 1);
-    let contactListClone: Contact[] = this.contacts.slice();
-    this.contactListChangedEvent.next(contactListClone);
+    this.storeContacts()
+
 
   }
+
+  compareName(contactA: Contact, contactB: Contact) {
+    const nameA = contactA.name.toUpperCase();
+    const nameB = contactB.name.toUpperCase();
+    if (nameA < nameB) {
+      return -1;
+    }
+    if (nameA > nameB) {
+      return 1;
+    }
+    return 0;
+  }
+
+  initContacts() {
+    this.http.get('https://jaimecms-f8238.firebaseio.com/contacts.json')
+      .map((response: Response) => {
+        const contacts: Contact[] = response.json();
+        return contacts;
+      })
+      .subscribe(
+        (contacts: Contact[]) => {
+          this.contacts = contacts;
+          this.contacts = this.contacts.sort(this.compareName)
+          this.maxContactId = this.getMaxId();
+          this.contactListChangedEvent.next(this.contacts.slice())
+        }
+      )
+  }
+
+  storeContacts() {
+    const contactString = JSON.stringify(this.contacts.slice())
+    let headers = new Headers({'Content-type':'application/json'});
+    this.http.put('https://jaimecms-f8238.firebaseio.com/contacts.json', contactString, {headers: headers})
+      .subscribe(
+        () => {
+          this.contactListChangedEvent.next(this.contacts.slice())
+        })
+  }
+
 
 }

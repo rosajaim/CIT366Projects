@@ -9,5 +9,6 @@ constructor(public id: string,
             public phone: string,
             public imageUrl: string,
             public group: Contact[]) {
-  }
+
+            }
 }
