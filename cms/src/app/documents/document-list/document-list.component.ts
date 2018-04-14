@@ -22,10 +22,10 @@ export class DocumentListComponent implements OnInit, OnDestroy {
     this.documents = this.documentService.getDocuments();
     this.subscription = this.documentService.documentListChangedEvent
       .subscribe(
-      (documentList: Document[]) => {
-        this.documents = documentList;
-      }
-    );
+        (documentList: Document[]) => {
+          this.documents = documentList;
+        }
+      );
 
   }
 

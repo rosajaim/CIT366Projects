@@ -13,7 +13,7 @@ export class DocumentEditComponent implements OnInit {
   document: Document;
   originalDocument: Document;
   editMode: boolean = false;
-  id: string;
+  id: string = '';
 
   constructor(private documentService: DocumentService,
               private router: Router,
@@ -42,8 +42,8 @@ export class DocumentEditComponent implements OnInit {
   }
 
   onSubmit(form: NgForm) {
-    const values = form.value;
-    const newDocument = new Document(this.id, values.documentTitle, values.documentDescription, values.documentUrl);
+    let values = form.value;
+    let newDocument = new Document('1', values.documentTitle, values.documentDescription, values.documentUrl);
 
     if(this.editMode) {
       this.documentService.updateDocument(this.originalDocument, newDocument);

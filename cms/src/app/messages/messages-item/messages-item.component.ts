@@ -12,8 +12,6 @@ export class MessagesItemComponent implements OnInit {
 
   @Input() message: Message;
   messageSender: string = "";
-  // canEdit: bolean = false;
-
   constructor(private contactService: ContactService){ }
 
 

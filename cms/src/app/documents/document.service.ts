@@ -1,7 +1,7 @@
 import { EventEmitter, Injectable } from '@angular/core';
 import { Document } from './document.model';
 import { Subject } from 'rxjs/subject';
-import { Http, Response } from '@angular/http';
+import { HttpClient, HttpResponse, HttpHeaders } from '@angular/common/http';
 import 'rxjs/Rx';
 
 @Injectable()
@@ -11,10 +11,10 @@ export class DocumentService {
 
   documentListChangedEvent = new Subject<Document[]>();
   documentSelectedEvent = new EventEmitter<Document>();
-  documentChangedEvent = new EventEmitter<Document[]>();
+  // documentChangedEvent = new EventEmitter<Document[]>();
   maxDocumentId: number;
 
-  constructor(private http: Http) {
+  constructor(private http: HttpClient) {
     this.initDocuments();
   }
 
@@ -34,8 +34,8 @@ export class DocumentService {
   getMaxId(): number {
     let maxId = 0;
 
-    for (let document in this.documents) {
-      let currentId = parseInt(this.documents[document].id);
+    for (let document of this.documents) {
+      let currentId = parseInt(document.id,10);
       if (currentId > maxId) {
         maxId = currentId;
       }
@@ -44,19 +44,31 @@ export class DocumentService {
   }
 
   addDocument(newDocument: Document) {
-    if (newDocument === null) {
+    if (!newDocument) {
       return;
     }
 
-    this.maxDocumentId++;
-    newDocument.id = this.maxDocumentId.toString();
-    this.documents.push(newDocument);
-    this.storeDocuments();
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json'
+    });
 
+    const strDocument = JSON.stringify(newDocument);
+
+    this.http.post('http://localhost:3000/documents', strDocument, {headers: headers})
+      .map(
+        (response: any) => {
+          return response.obj;
+        })
+      .subscribe(
+        (documents: Document[]) => {
+          this.documents = documents;
+          const documentListClone = this.documents.slice();
+          this.documentListChangedEvent.next(documentListClone);
+        });
   }
 
   updateDocument(originalDocument: Document, newDocument: Document) {
-    if (originalDocument === null || newDocument === null) {
+    if (!originalDocument|| !newDocument) {
       return;
     }
 
@@ -65,31 +77,50 @@ export class DocumentService {
       return;
     }
 
-    newDocument.id = originalDocument.id;
-    this.documents[pos] = newDocument;
-    this.storeDocuments();
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json'
+    });
+
+    const strDocument = JSON.stringify(newDocument);
+
+    this.http.patch('http://localhost:3000/documents/' + originalDocument.id
+                    , strDocument
+                    , {headers: headers})
+      .map(
+        (response: any) => {
+          return response.obj;
+        })
+      .subscribe(
+        (documents: Document[]) => {
+          this.documents = documents;
+          const documentListClone = this.documents.slice();
+          this.documentListChangedEvent.next(documentListClone);
+        });
   }
 
   deleteDocument(document: Document) {
-    if (document === null) {
+    if (!document) {
       return;
     }
 
-    const pos = this.documents.indexOf(document);
-    if (pos < 0) {
-      return;
-    }
-
-    this.documents.splice(pos, 1);
-    this.storeDocuments();
+   this.http.delete('http://localhost:3000/documents/' + document.id)
+     .map(
+       (response: any) => {
+         return response.obj;
+       })
+     .subscribe(
+       (documents: Document[]) => {
+         this.documents = documents;
+         const documentListClone = this.documents.slice();
+         this.documentListChangedEvent.next(documentListClone);
+       });
   }
 
   initDocuments() {
-    this.http.get('https://jaimecms-f8238.firebaseio.com/documents.json')
+    this.http.get('http://localhost:3000/documents')
       .map(
-        (response: Response) => {
-          const documents: Document[] = response.json();
-          return documents;
+        (response: any) => {
+          return response.obj;
         }
       )
       .subscribe(
@@ -103,12 +134,13 @@ export class DocumentService {
   }
 
   storeDocuments() {
+    JSON.stringify(this.documents);
     this.http.put('https://jaimecms-f8238.firebaseio.com/documents.json',
-      JSON.stringify(this.documents),
-      'Content-Type: application/json',)
+      this.documents)
       .subscribe(
         () => {
-          this.documentListChangedEvent.next(this.documents.slice());
+          const documentListClone = this.documents.slice();
+          this.documentListChangedEvent.next(documentListClone);
         }
       );
   }

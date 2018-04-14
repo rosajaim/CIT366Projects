@@ -28,6 +28,7 @@ import { WindRefService } from './wind-ref.service';
 import { ContactEditComponent } from './contacts/contact-edit/contact-edit.component';
 import { DndModule} from 'ng2-dnd';
 import { ContactFilterPipe } from './contacts/contact-filter.pipe';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -56,8 +57,8 @@ import { ContactFilterPipe } from './contacts/contact-filter.pipe';
     FormsModule,
     AppRoutingModule,
     HttpModule,
-    DndModule.forRoot()
-
+    DndModule.forRoot(),
+    HttpClientModule,
   ],
   providers: [
     ContactService,
