@@ -1,6 +1,52 @@
-<a class="list-group-item clearfix">
-  <div class=" ">
-    <span class="messageHeader">{{ messageSender}}</span>
-    <div class="messageText">{{ message?.msgText }}</div>
-  </div>
-</a>
+<article class="list-group-item clearfix">
+  <ng-container *ngIf="!editing; else editForm">
+    <strong>{{ message.subject }}</strong
+    ><span class="messageHeader"> — {{ messageSender }}</span>
+    <p class="messageText">{{ message.msgText }}</p>
+    <button
+      type="button"
+      class="btn btn-outline-primary btn-sm"
+      (click)="edit()"
+    >
+      Edit message
+    </button>
+    <button
+      type="button"
+      class="btn btn-outline-danger btn-sm"
+      (click)="remove()"
+    >
+      Delete message
+    </button>
+  </ng-container>
+  <ng-template #editForm>
+    <form (ngSubmit)="save()" #f="ngForm">
+      <label [for]="'edit-subject-' + message.id">Edit subject</label
+      ><input
+        class="form-control"
+        [id]="'edit-subject-' + message.id"
+        name="subject"
+        [(ngModel)]="subject"
+        required
+        maxlength="120"
+      />
+      <label [for]="'edit-body-' + message.id">Edit message body</label
+      ><textarea
+        class="form-control"
+        [id]="'edit-body-' + message.id"
+        name="body"
+        [(ngModel)]="body"
+        required
+        maxlength="10000"
+      ></textarea>
+      <button class="btn btn-success" type="submit" [disabled]="!f.valid">
+        Save message</button
+      ><button
+        class="btn btn-secondary"
+        type="button"
+        (click)="editing = false"
+      >
+        Cancel
+      </button>
+    </form>
+  </ng-template>
+</article>

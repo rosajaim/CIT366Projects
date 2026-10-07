@@ -1,1 +1,90 @@
-/* You can add global styles to this file, and also import other style files */
+/* Compatibility for the existing CMS layout while using Bootstrap 5. */
+.panel {
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  margin: 20px 0;
+  background: white;
+  box-shadow: 0 6px 15px #0002;
+}
+.panel-heading {
+  padding: 12px 15px;
+  background: #f5f5f5;
+  border-bottom: 1px solid #ddd;
+}
+.panel-body {
+  padding: 15px;
+}
+.title {
+  font-size: 24px;
+  font-weight: 600;
+}
+.pull-right {
+  float: right;
+}
+.pull-left {
+  float: left;
+}
+.clearfix:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+.form-group {
+  margin-bottom: 16px;
+}
+.list-group-item {
+  display: block;
+  color: #333;
+  text-decoration: none;
+}
+.navbar-default {
+  background: #f8f8f8;
+  border-bottom: 1px solid #ddd;
+}
+.navbar-nav {
+  flex-direction: row;
+  gap: 24px;
+}
+.navbar-nav a {
+  color: #555;
+  text-decoration: none;
+}
+.navbar-nav .active a {
+  font-weight: 600;
+  color: #111;
+}
+.col-xs-12 {
+  width: 100%;
+}
+.col-xs-5 {
+  width: 41.666%;
+}
+.col-xs-6 {
+  width: 50%;
+}
+.col-xs-4 {
+  width: 33.333%;
+}
+.login-panel {
+  max-width: 480px;
+  margin: 60px auto;
+}
+.login-panel input {
+  margin: 8px 0 20px;
+}
+.img-responsive {
+  max-width: 100%;
+  height: auto;
+}
+.img-rounded {
+  border-radius: 6px;
+}
+.help-block {
+  display: block;
+}
+.btn {
+  margin-right: 5px;
+}
+.alert {
+  margin-top: 12px;
+}

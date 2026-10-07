@@ -1,17 +1,19 @@
-var mongoose = require('mongoose');
+var mongoose = require("mongoose");
 var Schema = mongoose.Schema;
 
-var schema = new Schema ({
-  id: { type: String, required: true },
+var schema = new Schema({
+  id: { type: String, required: true, unique: true },
   name: { type: String },
   description: { type: String },
   url: { type: String },
-  children: [{
-    id: {type: String},
-    name: {type: String},
-    description: {type: String},
-    url: {type: String}
-  }]
+  children: [
+    {
+      id: { type: String },
+      name: { type: String },
+      description: { type: String },
+      url: { type: String },
+    },
+  ],
 });
 
-module.exports = mongoose.model('Document', schema);
+module.exports = mongoose.model("Document", schema);

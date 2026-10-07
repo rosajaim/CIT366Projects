@@ -1,25 +1,51 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { ContactEditComponent } from './contact-edit.component';
-
-describe('ContactEditComponent', () => {
-  let component: ContactEditComponent;
-  let fixture: ComponentFixture<ContactEditComponent>;
-
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [ ContactEditComponent ]
-    })
-    .compileComponents();
-  }));
-
-  beforeEach(() => {
-    fixture = TestBed.createComponent(ContactEditComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+import { AppModule } from "../../app.module";
+import { TestBed } from "@angular/core/testing";
+import { CommonModule } from "@angular/common";
+import { FormsModule } from "@angular/forms";
+import { RouterModule, ActivatedRoute } from "@angular/router";
+import { of, BehaviorSubject } from "rxjs";
+import { ContactEditComponent } from "./contact-edit.component";
+import { ContactService } from "../contact.service";
+import { ContactItemComponent } from "../contact-item/contact-item.component";
+import {
+  DragContactDirective,
+  DropContactDirective,
+} from "../../Shared/contact-drag.directive";
+describe("ContactEditComponent", () => {
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      imports: [AppModule],
+      providers: [
+        {
+          provide: ContactService,
+          useValue: {
+            getContact: () => ({
+              id: "1",
+              name: "Alice",
+              email: "alice@example.com",
+              phone: "",
+              imageUrl: "",
+              group: [],
+            }),
+            deleteContact: () => of([]),
+            addContact: () => of([]),
+            updateContact: () => of([]),
+            contactListChangedEvent: new BehaviorSubject([]),
+          },
+        },
+        {
+          provide: ActivatedRoute,
+          useValue: {
+            params: of({ id: "1" }),
+            snapshot: { params: { id: "1" } },
+          },
+        },
+      ],
+    }).compileComponents();
   });
-
-  it('should create', () => {
-    expect(component).toBeTruthy();
+  it("renders its real template with required dependencies", () => {
+    const fixture = TestBed.createComponent(ContactEditComponent);
+    fixture.detectChanges();
+    expect(fixture.nativeElement.textContent.trim().length).toBeGreaterThan(0);
   });
 });

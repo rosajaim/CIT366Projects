@@ -1,13 +1,13 @@
-var mongoose = require('mongoose');
+var mongoose = require("mongoose");
 var Schema = mongoose.Schema;
 
-var  schema = new Schema ({
-  id: { type: String, required: true },
+var schema = new Schema({
+  id: { type: String, required: true, unique: true },
   name: { type: String, required: true },
-  email: { type: String, required: true},
+  email: { type: String, required: true },
   phone: { type: String },
   imageUrl: { type: String },
-  group: [{type: Schema.Types.ObjectId, ref: 'Contact'}]
+  group: [{ type: Schema.Types.ObjectId, ref: "Contact" }],
 });
 
-module.exports = mongoose.model('Contact', schema);
+module.exports = mongoose.model("Contact", schema);

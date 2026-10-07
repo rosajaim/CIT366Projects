@@ -1,0 +1,12 @@
+node_modules
+dist
+.angular
+.git
+.env
+.env.*
+!.env.example
+*.log
+coverage
+out-tsc
+e2e
+server/test

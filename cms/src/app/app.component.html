@@ -1,6 +1,39 @@
-<app-header></app-header>
-<div class="container">
-<router-outlet></router-outlet>
+<div class="container" *ngIf="auth.error | async as error">
+  <p class="alert alert-danger" role="alert">{{ error }}</p>
 </div>
-
-
+<ng-container *ngIf="auth.ready | async; else loading">
+  <ng-container *ngIf="auth.authenticated | async; else loginForm">
+    <app-header></app-header>
+    <main class="container"><router-outlet></router-outlet></main>
+  </ng-container>
+</ng-container>
+<ng-template #loading><p class="container">Connecting to CMS…</p></ng-template>
+<ng-template #loginForm>
+  <main class="container login-panel">
+    <h1>Sign in to WeLearn CMS</h1>
+    <form (ngSubmit)="login()" #f="ngForm">
+      <label for="username">Username</label
+      ><input
+        id="username"
+        class="form-control"
+        name="username"
+        [(ngModel)]="username"
+        autocomplete="username"
+        required
+      />
+      <label for="password">Password</label
+      ><input
+        id="password"
+        class="form-control"
+        type="password"
+        name="password"
+        [(ngModel)]="password"
+        autocomplete="current-password"
+        required
+      />
+      <button type="submit" class="btn btn-primary" [disabled]="!f.valid">
+        Sign in
+      </button>
+    </form>
+  </main>
+</ng-template>

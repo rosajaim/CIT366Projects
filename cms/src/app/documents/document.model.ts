@@ -10,6 +10,6 @@ export class Document {
     this.name = name;
     this.description = description;
     this.url = url;
-    this.children = this.children;
+    this.children = [];
   }
 }

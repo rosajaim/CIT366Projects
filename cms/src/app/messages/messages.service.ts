@@ -1,96 +1,50 @@
-import { EventEmitter, Injectable } from '@angular/core';
-import { Message} from './message.model';
-import { Http, Response } from '@angular/http';
-import { Headers } from '@angular/http';
-import 'rxjs/Rx';
-
+import { Injectable, EventEmitter } from "@angular/core";
+import { HttpClient } from "@angular/common/http";
+import { BehaviorSubject, map, tap } from "rxjs";
+import { Message } from "./message.model";
 @Injectable()
 export class MessagesService {
-
-  messageChangeEvent = new EventEmitter<Message[]>();
   messages: Message[] = [];
-  maxMessageId: number;
-
-  constructor(private http: Http) {
+  messageChangeEvent = new BehaviorSubject<Message[]>([]);
+  messageSelectedEvent = new EventEmitter<Message>();
+  constructor(private http: HttpClient) {
     this.initMessages();
   }
-
-  getMessages(): Message[] {
+  getMessages() {
     return this.messages.slice();
   }
-
-  getMessage(id: string): Message {
-    for(let message of this.messages) {
-      if(message.id === id) {
-        return message
-      }
-    }
-    return null;
+  getMessage(id: string) {
+    return this.messages.find((row) => row.id === id) || null;
   }
-
-  addMessage(message: Message) {
-    if(!message) {
-      return;
-    }
-
-    const headers = new Headers({
-      'Content-Type': 'application/json'
-    });
-
-    message.id = '';
-    const strMessage = JSON.stringify(message);
-
-    this.http.post('http://localhost:3000/messages', strMessage, {headers: headers})
-      .map(
-        (response: Response) => {
-          return response.json().obj;
-        })
-      .subscribe(
-        (messages: Message[]) => {
-          this.messages = messages;
-          this.messageChangeEvent.next(this.messages.slice());
-        }
-      )
+  private update(rows: Message[]) {
+    this.messages = rows;
+    this.messageChangeEvent.next(rows.slice());
   }
-
-  getMaxId(): number {
-    let maxId = 0;
-
-    for (let message in this.messages) {
-      let currentId = parseInt(this.messages[message].id);
-      if (currentId > maxId) {
-        maxId = currentId;
-      }
-    }
-    return maxId;
-
-  }
-
   initMessages() {
-    this.http.get('http://localhost:3000/messages')
-      .map(
-        (response: Response) => {
-          return response.json().obj;
-        }
-      )
-      .subscribe(
-        (messagesReturned: Message[]) => {
-          this.messages = messagesReturned;
-          this.maxMessageId = this.getMaxId();
-          this.messageChangeEvent.next(this.messages.slice());
-        }
+    this.http
+      .get<any>("/api/messages")
+      .subscribe({ next: (r) => this.update(r.obj), error: () => {} });
+  }
+  addMessage(row: Message) {
+    return this.http.post<any>("/api/messages", row).pipe(
+      map((r) => r.obj as Message[]),
+      tap((rows) => this.update(rows)),
+    );
+  }
+  updateMessage(original: Message, row: Message) {
+    return this.http
+      .patch<any>("/api/messages/" + encodeURIComponent(original.id), row)
+      .pipe(
+        map((r) => r.obj as Message[]),
+        tap((rows) => this.update(rows)),
       );
   }
-
-  storeMessages() {
-    this.http.put('http://localhost:3000/messages',
-      JSON.stringify(this.messages),
-      'Content-Type: application/jason',)
-      .subscribe(
-        () => {
-          this.messageChangeEvent.next(this.messages.slice());
-        }
+  deleteMessage(row: Message) {
+    return this.http
+      .delete<any>("/api/messages/" + encodeURIComponent(row.id))
+      .pipe(
+        map((r) => r.obj as Message[]),
+        tap((rows) => this.update(rows)),
       );
   }
-
 }

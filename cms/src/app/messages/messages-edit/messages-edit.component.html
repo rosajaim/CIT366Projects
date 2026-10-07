@@ -1,18 +1,17 @@
 <div class="panel panel-default">
   <div class="panel-body">
-
-    <form id="document-edit">
+    <form id="message-edit" (ngSubmit)="onSendMessage()">
       <div class="row">
-
         <div class="col-sm-12 form-group">
-          <label for="Subject">Subject</label>
+          <label for="subject">Subject</label>
           <input
             type="text"
             id="subject"
             class="form-control"
             size="120"
             max="120"
-            #subjectRef>
+            #subjectRef
+          />
         </div>
 
         <div class="col-sm-12 form-group">
@@ -23,18 +22,19 @@
             class="form-control"
             size="120"
             max="255"
-            #msgTextRef>
+            #msgTextRef
+          />
         </div>
       </div>
 
       <div class="row">
         <div class="col-xs-12">
-          <button class="btn btn-success" (click)="onSendMessage()" type="submit">Send</button>
-          <button class="btn btn-danger" (click)="onClear()" type="button">Clear</button>
+          <button class="btn btn-success" type="submit">Send</button>
+          <button class="btn btn-danger" (click)="onClear()" type="button">
+            Clear
+          </button>
         </div>
       </div>
-
     </form>
-
   </div>
 </div>

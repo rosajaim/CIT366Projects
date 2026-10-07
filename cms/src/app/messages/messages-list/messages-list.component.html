@@ -11,16 +11,14 @@
           <div class="panel-body">
             <app-messages-item
               *ngFor="let messageEl of messages"
-              [message] = "messageEl"
-              (click)="onAddMessage(messageEl)">
+              [message]="messageEl"
+            >
             </app-messages-item>
           </div>
         </div>
       </div>
       <div class="panel-footer">
-        <app-messages-edit
-          (addMessageEvent)="onAddMessage($event)">
-        </app-messages-edit>
+        <app-messages-edit> </app-messages-edit>
       </div>
     </div>
   </div>

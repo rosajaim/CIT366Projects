@@ -1,11 +1,11 @@
-var mongoose = require('mongoose');
+var mongoose = require("mongoose");
 var Schema = mongoose.Schema;
 
-var schema = new Schema ({
-  id: { type: String, required: true },
+var schema = new Schema({
+  id: { type: String, required: true, unique: true },
   subject: { type: String },
   msgText: { type: String },
-  sender: { type: Schema.Types.ObjectId, ref: 'Contact'}
+  sender: { type: Schema.Types.ObjectId, ref: "Contact" },
 });
 
-module.exports = mongoose.model('Message', schema);
+module.exports = mongoose.model("Message", schema);

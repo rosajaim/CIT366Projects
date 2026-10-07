@@ -1,14 +1,14 @@
 <div class="panel panel-default">
   <div class="panel-heading clearfix">
-    <p class="contact-name">{{contact?.name}}</p>
+    <p class="contact-name">{{ contact?.name }}</p>
     <div class="row">
       <div class="pull-left">
         <img
-          src="{{contact?.imageUrl}}"
-          alt="{{contact?.name}}"
+          src="{{ contact?.imageUrl }}"
+          alt="{{ contact?.name }}"
           class="img-responsive"
-          style="max-height:100px;
-          padding-left:12px">
+          style="max-height: 100px; padding-left: 12px"
+        />
       </div>
       <div class="pull-right" style="margin-right: 10px; margin-top: 80px">
         <button class="btn btn-primary" [routerLink]="['edit']">Edit</button>
@@ -28,9 +28,14 @@
         <span class="label-value">{{ contact?.phone }}</span>
       </div>
       <div class="row">
-        <span *ngIf="contact?.group != null"><label>Contacts in Team:</label></span>
+        <span *ngIf="contact?.group != null"
+          ><label>Contacts in Team:</label></span
+        >
       </div>
-      <app-contact-item *ngFor="let contact of contact.group" [contact]="contact"></app-contact-item>
+      <app-contact-item
+        *ngFor="let contact of contact?.group"
+        [contact]="contact"
+      ></app-contact-item>
     </div>
   </div>
 </div>

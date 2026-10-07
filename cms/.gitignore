@@ -41,3 +41,8 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
+
+# Current Angular build cache and private environment files
+.angular/
+.env.*
+!.env.example
