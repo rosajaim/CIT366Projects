@@ -1,5 +1,5 @@
 const readline = require("node:readline");
-const { hashPassword } = require("../server/auth");
+const { hashPassword } = require("../server/password");
 // Input is hidden on a TTY. Pipe input for secure noninteractive provisioning.
 (async () => {
   let password;

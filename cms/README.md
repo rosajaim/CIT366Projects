@@ -37,3 +37,7 @@ The app is configured for one trusted administrator, not public registration or 
 ## Scope
 
 The sibling `AllEventsTicketing` project is not part of this deployment. The old Protractor test scaffolding has been replaced by the browser smoke test. Do not deploy the whole repository as static files; the CMS needs its API, persistent MongoDB and runtime credentials.
+
+## Render staging preview
+
+Follow [RENDER.md](RENDER.md) to create Render and MongoDB Atlas accounts and launch the root `render.yaml` Blueprint from `production-readiness`. When `APP_ORIGIN` is unset, the app uses Render's `RENDER_EXTERNAL_URL`. For custom domains, an explicit `APP_ORIGIN` overrides it. The password-hash helper can run without installing application dependencies.

@@ -1,6 +1,7 @@
 const crypto = require("node:crypto");
 function readConfig(env = process.env) {
   const production = env.NODE_ENV === "production";
+  const publicOrigin = env.APP_ORIGIN || env.RENDER_EXTERNAL_URL;
   for (const name of ["ADMIN_USERNAME", "ADMIN_PASSWORD_HASH"]) {
     if (!env[name])
       throw new Error(`Missing ${name}. See README.md for setup.`);
@@ -8,14 +9,16 @@ function readConfig(env = process.env) {
   if (!/^scrypt-v1\$[a-f0-9]{32}\$[a-f0-9]{128}$/.test(env.ADMIN_PASSWORD_HASH))
     throw new Error("Invalid ADMIN_PASSWORD_HASH format");
   if (production) {
-    for (const name of ["MONGODB_URI", "SESSION_SECRET", "APP_ORIGIN"])
+    for (const name of ["MONGODB_URI", "SESSION_SECRET"])
       if (!env[name]) throw new Error(`Missing ${name}`);
+    if (!publicOrigin)
+      throw new Error("Missing APP_ORIGIN or RENDER_EXTERNAL_URL");
     if (env.SESSION_SECRET.length < 32)
       throw new Error("SESSION_SECRET must have at least 32 characters");
-    if (!env.APP_ORIGIN.startsWith("https://"))
+    if (!publicOrigin.startsWith("https://"))
       throw new Error("APP_ORIGIN must use HTTPS in production");
   }
-  const origin = env.APP_ORIGIN || "http://localhost:4200";
+  const origin = publicOrigin || "http://localhost:4200";
   if (new URL(origin).origin !== origin)
     throw new Error(
       "APP_ORIGIN must be an origin without a path or trailing slash",
